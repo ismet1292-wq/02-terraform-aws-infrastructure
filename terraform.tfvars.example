@@ -1,0 +1,6 @@
+# Example only; Terraform does not automatically load this file.
+# Even enable_host=false still plans a real network if you run plan/apply.
+aws_region        = "us-east-1"
+availability_zone = "us-east-1a"
+enable_host       = false
+# ami_id = "" # Supply a verified AL2023 x86-64 AMI only after approval.

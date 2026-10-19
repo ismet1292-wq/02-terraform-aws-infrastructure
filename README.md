@@ -1,84 +1,89 @@
 # Terraform AWS Infrastructure
 
-A Terraform project demonstrating Infrastructure as Code (IaC) principles using the AWS Provider.
+A standalone DevOps portfolio project for a small AWS network and an optional
+Systems Manager-managed EC2 demonstration host in us-east-1.
 
-> **Status:** Project initialized and validated. AWS infrastructure deployment will be completed after AWS account access is restored.
+**Status:** configuration implemented and validated locally with mocked AWS tests.
+This repository has not been deployed. The separate
+[CloudOps Observatory demo](https://github.com/ismet1292-wq/cloudops-observatory/blob/main/docs/AWS_DEMO_RESULTS.md)
+was deployed, tested, and cleaned up; its resources and Terraform state are not
+owned by this repository.
 
----
-
-## Features
-
-- Terraform project structure
-- AWS Provider configuration
-- Variables
-- Outputs
-- Git version control
-- Ready for AWS deployment
-
----
-
-## Technologies
-
-- Terraform
-- AWS Provider
-- Git
-- GitHub
-- PowerShell
-- Visual Studio Code
-
----
-
-## Project Structure
+## Architecture
 
 ```text
-02-terraform-aws-infrastructure/
-│
-├── main.tf
-├── provider.tf
-├── variables.tf
-├── outputs.tf
-├── .gitignore
-├── .terraform.lock.hcl
-├── README.md
-└── modules/
+VPC 10.43.0.0/16
+  Public subnet 10.43.1.0/24
+    Route table -> Internet gateway (outbound access)
+    Security group: no inbound; outbound TCP 443
+    Optional t3.micro -> encrypted 8 GiB root disk
+                     -> instance role / SSM Core policy
+Operator -> AWS Systems Manager -> host (no inbound SSH)
 ```
 
----
+The default configuration defines eight network resources. Setting enable_host
+adds an instance, role, managed policy attachment, and instance profile. The host
+has an auto-assigned public IPv4 for outbound SSM connectivity; the subnet does
+not assign addresses automatically. There is no NAT gateway, load balancer,
+Elastic IP, application installation, or persistent data disk in this project.
 
-## Commands Used
+## Validate locally in PowerShell
 
-```bash
-terraform fmt
-terraform init
-terraform validate
+Use Terraform 1.9 or later (CI uses 1.15.8). Run from this repository:
+
+```powershell
+terraform fmt -check -recursive
+terraform init -backend=false -input=false -lockfile=readonly
+terraform validate -no-color
+terraform test -no-color
 ```
 
----
+These commands do not create AWS resources. The tests use a mocked provider and
+synthetic AMI ID; they do not make AWS API calls or prove that a real host boots.
+Provider initialization requires internet access to download the provider when
+it is not already cached. Commit the dependency lock file.
 
-## Current Progress
+Tests cover disabled-by-default compute, no inbound access, HTTPS outbound,
+subnet addressing, IMDSv2, root-disk encryption/deletion, standard CPU credits,
+required AMI input, and the permitted region. GitHub Actions repeats the checks
+without AWS credentials and never applies this configuration.
 
-- ✅ Terraform installed
-- ✅ AWS Provider configured
-- ✅ Variables created
-- ✅ Outputs created
-- ✅ Configuration validated
-- ✅ GitHub repository created
+## Before a real deployment
 
----
+A real plan/apply is a separate, explicitly authorized step. Even with
+enable_host=false, apply creates the network. Review account identity, zone
+availability, CIDR overlap, permissions, costs, duration, and cleanup ownership.
+The different CIDR does not automatically prove absence of overlap.
 
-## Planned AWS Infrastructure
+The optional host requires an explicit Amazon-owned AL2023 x86-64 AMI verified
+in the intended region. Input validation checks the ID format only. SSM Agent
+must be installed and running in that AMI. Host operator session permissions and
+the local Session Manager plugin are separate requirements. The attached AWS
+SSM Core managed policy supports capabilities beyond interactive sessions.
+The existing CloudOps deployment policy is not assumed to authorize this project.
 
-- VPC
-- Public Subnet
-- Internet Gateway
-- Route Table
-- Security Group
-- EC2 Instance
+Copy terraform.tfvars.example to a local terraform.tfvars only when preparing an
+authorized plan. No credentials belong in that file. Use temporary AWS access.
+Keep state, local inputs, and saved plans out of Git; secure state backups and
+locking are required for collaborative operations.
 
----
+## Cost and cleanup
 
-## Author
+EC2, its root disk, public IPv4, data transfer, and other AWS usage can incur
+charges or consume credits. No free-tier guarantee or enforced budget cap is
+provided. Stopping a host does not remove disk costs; retained addresses can also
+continue to cost money. Review a saved destroy plan before executing it.
 
-**Ismet Xani**
+This project has no retained application data. Destroying the instance deletes
+its root disk. A full destroy also removes its host IAM resources and its own
+network. Never use this root to clean up CloudOps resources; preserve separate
+state ownership. After any deployment cleanup, verify instance termination,
+volume removal, addresses, and IAM resources directly in AWS.
 
-DevOps Portfolio Project
+## Limits
+
+This is one subnet and an optional single host. It does not establish high
+availability, a production application deployment, successful SSM connectivity,
+recovery behavior, or a security audit. Live verification remains pending.
+
+**Author:** Ismet Xani

@@ -22,3 +22,6 @@ override.tf.json
 # CLI configuration
 .terraformrc
 terraform.rc
+# Saved plans can contain sensitive values
+*.tfplan
+*.tfplan.*
