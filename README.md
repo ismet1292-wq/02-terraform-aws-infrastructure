@@ -3,8 +3,9 @@
 A standalone DevOps portfolio project for a small AWS network and an optional
 Systems Manager-managed EC2 demonstration host in us-east-1.
 
-**Status:** configuration implemented and validated locally with mocked AWS tests.
-This repository has not been deployed. The separate
+**Status:** the eight-resource network was deployed and verified in us-east-1
+on October 19, 2026. The optional EC2 host remains disabled and has not been
+deployed. See [deployment evidence](docs/DEPLOYMENT_RESULTS.md). The separate
 [CloudOps Observatory demo](https://github.com/ismet1292-wq/cloudops-observatory/blob/main/docs/AWS_DEMO_RESULTS.md)
 was deployed, tested, and cleaned up; its resources and Terraform state are not
 owned by this repository.

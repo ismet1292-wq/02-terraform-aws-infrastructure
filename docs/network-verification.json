@@ -1,0 +1,66 @@
+{
+  "VerifiedUTC": "2026-10-19T20:28:43.9923624Z",
+  "Apply": "8 added, 0 changed, 0 destroyed",
+  "Subnet": [
+    {
+      "Id": "subnet-0e385165725f3b001",
+      "Vpc": "vpc-0d699153fc371b108",
+      "CIDR": "10.43.1.0/24",
+      "Zone": "us-east-1a",
+      "AutoPublicIP": false,
+      "State": "available"
+    }
+  ],
+  "SecurityGroups": [
+    {
+      "Id": "sg-0bec1bbe4813ae369",
+      "Ingress": [],
+      "Egress": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 443,
+          "ToPort": 443,
+          "UserIdGroupPairs": [],
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": []
+        }
+      ]
+    }
+  ],
+  "RouteTables": [
+    {
+      "Id": "rtb-06835b1b38adb9f59",
+      "Routes": [
+        {
+          "DestinationCidrBlock": "10.43.0.0/16",
+          "GatewayId": "local",
+          "Origin": "CreateRouteTable",
+          "State": "active"
+        },
+        {
+          "DestinationCidrBlock": "0.0.0.0/0",
+          "GatewayId": "igw-081259f8974fe4115",
+          "Origin": "CreateRoute",
+          "State": "active"
+        }
+      ],
+      "Associations": [
+        {
+          "Main": false,
+          "RouteTableAssociationId": "rtbassoc-0c04830ee43aedb39",
+          "RouteTableId": "rtb-06835b1b38adb9f59",
+          "SubnetId": "subnet-0e385165725f3b001",
+          "AssociationState": {
+            "State": "associated"
+          }
+        }
+      ]
+    }
+  ],
+  "ProjectInstances": []
+}
