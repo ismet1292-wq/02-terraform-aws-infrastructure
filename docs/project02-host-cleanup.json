@@ -1,0 +1,21 @@
+{
+  "VerifiedUTC": "2026-10-19T21:00:50.2480993Z",
+  "Instance": [
+    {
+      "Id": "i-0674380f539b38a79",
+      "State": "terminated"
+    }
+  ],
+  "RootVolumes": [],
+  "Cleanup": "0 added, 0 changed, 4 destroyed",
+  "RemainingState": [
+    "aws_internet_gateway.demo",
+    "aws_route.internet",
+    "aws_route_table.demo",
+    "aws_route_table_association.demo",
+    "aws_security_group.host",
+    "aws_subnet.demo",
+    "aws_vpc.demo",
+    "aws_vpc_security_group_egress_rule.https"
+  ]
+}

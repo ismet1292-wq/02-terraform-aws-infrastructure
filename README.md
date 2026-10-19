@@ -4,8 +4,8 @@ A standalone DevOps portfolio project for a small AWS network and an optional
 Systems Manager-managed EC2 demonstration host in us-east-1.
 
 **Status:** the eight-resource network was deployed and verified in us-east-1
-on October 19, 2026. The optional EC2 host remains disabled and has not been
-deployed. See [deployment evidence](docs/DEPLOYMENT_RESULTS.md). The separate
+on October 19, 2026. The optional EC2 host was temporarily deployed, verified,
+and then removed with its root disk and IAM resources. It is disabled again. See [deployment evidence](docs/DEPLOYMENT_RESULTS.md). The separate
 [CloudOps Observatory demo](https://github.com/ismet1292-wq/cloudops-observatory/blob/main/docs/AWS_DEMO_RESULTS.md)
 was deployed, tested, and cleaned up; its resources and Terraform state are not
 owned by this repository.
@@ -85,6 +85,6 @@ volume removal, addresses, and IAM resources directly in AWS.
 
 This is one subnet and an optional single host. It does not establish high
 availability, a production application deployment, successful SSM connectivity,
-recovery behavior, or a security audit. Live verification remains pending.
+recovery behavior, or a security audit. The temporary host passed live EC2 status and SSM registration checks. Application installation, interactive sessions, reboot recovery, and production readiness were not tested in this project.
 
 **Author:** Ismet Xani

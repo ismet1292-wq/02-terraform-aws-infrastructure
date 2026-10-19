@@ -1,0 +1,67 @@
+{
+  "VerifiedUTC": "2026-10-19T20:58:07.2466789Z",
+  "Apply": "4 added, 0 changed, 0 destroyed",
+  "Instance": [
+    {
+      "Id": "i-0674380f539b38a79",
+      "State": "running",
+      "Launch": "2026-10-19T16:56:34-04:00",
+      "Type": "t3.micro",
+      "Metadata": {
+        "State": "applied",
+        "HttpTokens": "required",
+        "HttpPutResponseHopLimit": 1,
+        "HttpEndpoint": "enabled",
+        "HttpProtocolIpv6": "disabled",
+        "InstanceMetadataTags": "disabled"
+      },
+      "Disks": [
+        {
+          "DeviceName": "/dev/xvda",
+          "Ebs": {
+            "AttachTime": "2026-10-19T16:56:35-04:00",
+            "DeleteOnTermination": true,
+            "Status": "attached",
+            "VolumeId": "vol-00792f38fa7f2e60b",
+            "EbsCardIndex": 0
+          }
+        }
+      ],
+      "SecurityGroups": [
+        {
+          "GroupId": "sg-0bec1bbe4813ae369",
+          "GroupName": "portfolio-host-75556539663a0ef5f89704c4f8"
+        }
+      ]
+    }
+  ],
+  "RootVolume": [
+    {
+      "Id": "vol-00792f38fa7f2e60b",
+      "Encrypted": true,
+      "GiB": 8,
+      "Type": "gp3"
+    }
+  ],
+  "SSM": [
+    {
+      "Id": "i-0674380f539b38a79",
+      "Ping": "Online",
+      "Agent": "3.3.5390.0",
+      "Platform": "Amazon Linux"
+    }
+  ],
+  "Credits": [
+    {
+      "InstanceId": "i-0674380f539b38a79",
+      "CpuCredits": "standard"
+    }
+  ],
+  "StatusChecks": [
+    {
+      "Instance": "ok",
+      "System": "ok"
+    }
+  ],
+  "StatusVerifiedUTC": "2026-10-19T20:59:55.4386452Z"
+}
