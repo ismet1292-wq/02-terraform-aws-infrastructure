@@ -84,7 +84,9 @@ volume removal, addresses, and IAM resources directly in AWS.
 ## Limits
 
 This is one subnet and an optional single host. It does not establish high
-availability, a production application deployment, successful SSM connectivity,
-recovery behavior, or a security audit. The temporary host passed live EC2 status and SSM registration checks. Application installation, interactive sessions, reboot recovery, and production readiness were not tested in this project.
+availability, a production application deployment, recovery behavior, or a
+security audit. The temporary host passed live EC2 status and SSM registration
+checks. Application installation, interactive sessions, reboot recovery, and
+production readiness were not tested in this project.
 
 **Author:** Ismet Xani
